@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Post</h1>
+<div class="container">
+<div class="row">
+  <div class="col-7">
+<table class="table">
+  <thead>
+  <tr>
+  <!-- <th>ID NO</th> -->
+  <th>Name</th>
+  <th>Description</th>
+  <th>Date</th>
+  <th>Posted By</th>
+  <th>PDF</th>
+  <th>Delete</th>
+  </tr>
+</thead>
+{% for pdf in pdfs %}
+  <tr>
+    <td>{{pdf.name}}</td>
+    <td>{{pdf.description}}</td>
+    <td>{{pdf.date}}</td>
+    <td>{{pdf.posted}}</td>
+    <td><a href="{{pdf.pdf.url}}" class="btn btn-primary " target="_blank">Download</a></td>
+    <td>
+    <form method="post" action="{% url 'delete_post' pdf.pk %}">
+                {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-mb">Delete</button>
+    </form>
+  </td>
+  </tr>
+  </div>
+</div>
+</div>
+<!-- </table> -->
+{% endfor %}
+{% endblock %}

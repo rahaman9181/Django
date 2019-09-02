@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>home</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet"  href="{% static 'index.css' %}">
+</head>
+<body>
+<div id="container">
+<!-- <a href="http://www.wysiwygwebbuilder.com" target="_blank"><img src="images/builtwithwwb15.png" alt="WYSIWYG Web Builder" style="position:absolute;left:441px;top:967px;margin: 0;border-width:0;z-index:250"></a> -->
+<div id="wb_Heading1" style="position:absolute;left:330px;top:143px;width:331px;height:167px;z-index:1;">
+<h1 id="Heading1">Welcome to Mic INFORMATION TECHNOLOGY Home Page</h1></div>
+<picture id="wb_Picture1" style="position:absolute;left:0px;top:0px;width:1343px;height:103px;z-index:2">
+<img src="{% static 'images/mic.jpg' %}" alt="">
+</picture>
+<div id="container">
+{% if user.is_authenticated %}
+
+<div id="wb_Text1" style="position:absolute;left:515px;top:325px;width:94px;height:23px;z-index:3;">
+<p style="font-size:13px;line-height:16px;color:#000000;"><span style="color:#000000;"><h3>Hello, {{user.first_name }} {{ user.last_name}}</h3></span></p></div>
+<li><a id="Button1" href="logout" style="position:absolute;left:357px;top:338px;width:94px;height:23px;z-index:3;">Logout</a></li>
+<div><li><a id="Button2" href="password" style="position:absolute;left:357px;top:450px;width:120px;height:23px;z-index:3;">Change Password</a></li></div>
+{% else %}
+<li><a id="Button1" href="register" style="position:absolute;left:357px;top:338px;width:94px;height:23px;z-index:3;">Register</a></li>
+<li><a id="Button2" href="login" style="position:absolute;left:515px;top:338px;width:94px;height:23px;z-index:4;">Login</a></li>
+<!-- <li><a id="Button2" href="change_password" style="position:absolute;left:357px;top:450px;width:120px;height:23px;z-index:3;">Change Password</a></li> -->
+{% endif %}
+</div>
+<!-- <a id="Button1" href="login" style="position:absolute;left:357px;top:338px;width:94px;height:23px;z-index:3;">LOGIN</a> -->
+<!-- <a id="Button2" href="register" style="position:absolute;left:515px;top:338px;width:94px;height:23px;z-index:4;">SIGN UP</a> -->
+</div>
+
+
+</div>
+</body>
+</html>
