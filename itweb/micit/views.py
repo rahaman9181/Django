@@ -2,6 +2,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import password_validation
@@ -122,11 +123,31 @@ def password_change(request):
 def password(request):
     return render(request,'password_change.html')
 
-@login_required()
+# @login_required()
 def post_list(request):
     # posts = IT_Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    pdfs=IT_Posts.objects.all().order_by('id').reverse()
-    return render(request,'post_list.html', {'pdfs':pdfs})
+    pdfs=IT_Posts.objects.all().order_by('-date')
+    paginator = Paginator(pdfs, 3)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+
+    context = {
+        'pdfs': paged_listings
+    }
+
+    return render(request, 'post_list.html', context)
+
+    # def listing(request, listing_id):
+    #   listing = get_object_or_404(Listing, pk=listing_id)
+    #
+    #   context = {
+    #     'pdfs': listing
+    #   }
+
+
+
+
+    # return render(request,'post_list.html', {'pdfs':pdfs})
 
 @login_required()
 def upload_post(request):
